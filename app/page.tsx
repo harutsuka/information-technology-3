@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <main>
       <h1>情報3 定着確認</h1>
-      <QuizContainer questions={[currentQuestion]} />
+      <QuizContainer question={currentQuestion} />
     </main>
   );
 }
