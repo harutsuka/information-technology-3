@@ -19,7 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${notoSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col items-center justify-start py-10">
+        <h1 className="text-2xl font-bold">情報3 定着確認</h1>
+        {children}
+      </body>
     </html>
   );
 }

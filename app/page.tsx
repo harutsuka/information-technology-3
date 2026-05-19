@@ -29,8 +29,7 @@ export default function Home() {
   }
 
   return (
-    <main>
-      <h1>情報3 定着確認</h1>
+    <main className="container px-6 py-8">
       <QuizContainer question={currentQuestion} />
     </main>
   );
