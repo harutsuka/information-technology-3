@@ -3,7 +3,7 @@
 :root {
   --background: #f1f5f9;
   --foreground: #171717;
-  --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-main: 0px 4px 8px rgba(0, 0, 0, 0.1);
   --button-color: #ccc;
   --main-color: oklch(70.7% 0.165 254.624);
   --light-color: oklch(80.9% 0.105 251.813);
@@ -14,11 +14,11 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-noto-sans);
-  --box-shadow: var(--box-shadow);
-  --button-color: var(--button-color);
-  --main-color: var(--main-color);
-  --light-color: var(--light-color);
-  --hover-color: var(--hover-color);
+  --shadow-main: var(--shadow-main);
+  --color-button-color: var(--button-color);
+  --color-main-color: var(--main-color);
+  --color-light-color: var(--light-color);
+  --color-hover-color: var(--hover-color);
 }
 /* 
 @media (prefers-color-scheme: dark) {
