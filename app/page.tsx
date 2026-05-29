@@ -1,36 +1,26 @@
-"use client";
-import { useEffect, useState } from "react";
-import { getQuestions } from "@/lib/questions";
-import QuizContainer from "@/components/quizContainer";
-import { filterQuestionsByWeek } from "@/lib/quiz";
-import { shuffleQuestions } from "@/lib/quiz";
+import RangeSettings from "@/components/rangeSettings";
+import Link from "next/link";
 
 export default function Home() {
-  const [questions, setQuestions] = useState<any[] | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const currentQuestion = questions?.[currentIndex];
-
-  useEffect(() => {
-    const initializeQuestions = async () => {
-      try {
-        const allQuestions = await getQuestions();
-        const filteredQuestions = filterQuestionsByWeek(allQuestions, 1);
-        const shuffledQuestions = shuffleQuestions(filteredQuestions);
-
-        setQuestions(filteredQuestions);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    initializeQuestions();
-  }, []);
-  if (!questions) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <main className="container px-6 py-8">
-      <QuizContainer question={currentQuestion} />
+      <div className="flex flex-col items-center gap-4 max-w-md mx-auto p-4">
+        <div className="w-full text-center border border-dashed border-gray-300 p-6 rounded-lg mb-2">
+          <RangeSettings />
+        </div>
+
+        <Link href="/quiz" className="w-full inline-block">
+          <div className="bg-main-color hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg text-center shadow-main">
+            🚀 クイズをはじめる
+          </div>
+        </Link>
+
+        <Link href="/questions" className="w-full inline-block">
+          <div className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg text-center shadow-main transition-colors">
+            📕 問題一覧を見る
+          </div>
+        </Link>
+      </div>
     </main>
   );
 }
