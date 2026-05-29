@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const notoSans = Geist({
   variable: "--font-noto-sans",
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${notoSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col items-center justify-start py-10">
-        <h1 className="text-2xl font-bold">情報3 定着確認</h1>
+        <Link href="/" className="text-2xl font-bold block">
+          情報3 定着確認
+        </Link>
         {children}
       </body>
     </html>
