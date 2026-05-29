@@ -1,5 +1,5 @@
-export function filterQuestionsByWeek(questions: any[], week: number) {
-  return questions.filter((q) => q.week === week);
+export function filterQuestionsByWeek(questions: any[], week: number[]) {
+  return questions.filter((q) => week.includes(q.week));
 }
 
 export function filterQuestionsByKeyword(questions: any[], keyword: string) {
