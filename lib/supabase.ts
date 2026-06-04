@@ -6,7 +6,7 @@ export function getSupabaseClient() {
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!url || !anon) {
-    // ビルド時に環境変数がない場合は、エラーを出さずにnullを返す（即死を防ぐ）
+    // ビルド時に環境変数がない場合は、エラーを出さずにnullを返す（これでビルド即死を防ぐ）
     return null;
   }
 
