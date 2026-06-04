@@ -4,6 +4,8 @@ import Link from "next/link";
 import { filterQuestionsByWeek } from "@/lib/quiz";
 import { useEffect, useState, useMemo } from "react";
 
+export const dynamic = "force-dynamic";
+
 export default function QuestionsPage({ question }: { question: any }) {
   const [allQuestions, setAllQuestions] = useState<any[] | null>(null);
 
