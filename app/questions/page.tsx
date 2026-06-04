@@ -3,19 +3,30 @@ import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
-// 💡 コンポーネント自体を async にして、直接サーバー側でデータを取得します（useEffectやuseStateは不要に！）
 export default async function QuestionsPage() {
   let allQuestions: any[] = [];
 
-  try {
-    // 💡 Vercelのサーバーサイド環境で、本物の環境変数を使って安全にデータを取得します
-    allQuestions = (await getQuestions()) || [];
-  } catch (err) {
-    console.error("Supabaseからのデータ取得に失敗:", err);
+  // もしビルド中などで環境変数が存在しない場合は、Supabaseを呼び出さずに即座にスキップさせる！
+  // これでビルドワーカーがクラッシュするのを100%物理的に防ぎます。
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
+    console.log("ビルド中のため、Supabaseの呼び出しをスキップしました。");
+  } else {
+    try {
+      // 本番環境（ブラウザからアクセスされた時）は、ここが動いて100%本物のデータが取れる！
+      allQuestions = (await getQuestions()) || [];
+    } catch (err) {
+      console.error("Supabaseからのデータ取得に失敗:", err);
+    }
   }
 
-  // 💡 サーバー側で事前にID順にソート（useMemoも不要になって超シンプルに！）
-  const sortedQuestions = [...allQuestions].sort((a, b) => a.id - b.id);
+  // 💡 安全のために、データがない時は空配列にしておく
+  const sortedQuestions =
+    allQuestions.length > 0
+      ? [...allQuestions].sort((a, b) => a.id - b.id)
+      : [];
 
   if (sortedQuestions.length === 0) {
     return <p className="text-center my-8">問題が見つかりませんでした。</p>;
