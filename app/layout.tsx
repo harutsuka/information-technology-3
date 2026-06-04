@@ -3,6 +3,7 @@ import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
+import { FavoriteProvider } from "@/lib/favoriteContext";
 
 const notoSans = Noto_Sans_JP({
   subsets: ["latin"],
@@ -26,7 +27,9 @@ export default function RootLayout({
         <Link href="/" className="text-2xl font-bold block">
           情報3 定着確認
         </Link>
-        {children}
+        <FavoriteProvider>
+          {children}
+        </FavoriteProvider>
         <Analytics />
       </body>
     </html>
