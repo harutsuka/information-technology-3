@@ -1,16 +1,18 @@
 import { getSupabaseClient } from "./supabase";
+// 💡 Next.js純正の動的強制関数をインポート
+import { connection } from "next/server";
 
 export async function getQuestions() {
-  // 💡 実行されたまさに「この瞬間」に、環境変数があるかチェックしてクライアントを生成
+  // 💡 【超重要】Next.jsにビルド時のプリレンダリング（静的ロック）を完全に諦めさせます
+  await connection();
+
   const supabase = getSupabaseClient();
 
-  // ビルド中など、環境変数がない時は何もせず空配列を返す（ビルドエラーを100%回避）
+  // 万が一環境変数がない場合は、ここでエラーを出す（ビルド時はconnection()のおかげでここを通らない）
   if (!supabase) {
-    console.log("Supabase client is not initialized (Build time fallback)");
-    return [];
+    throw new Error("Supabase client is not initialized");
   }
 
-  // 本番環境では、本物のクライアントでSupabaseからデータを引っこ抜く！
   const { data, error } = await supabase.from("questions").select("*");
 
   if (error) {
