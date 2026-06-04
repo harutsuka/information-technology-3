@@ -35,6 +35,14 @@
   margin-top: 10px;
   font-weight: bold;
   background-color: #f9f9f9;
+  width: 95%;
+}
+.answerContainer {
+  display: flex;
+  align-items: center;
+}
+.answerContainer svg {
+  translate: 0 4px;
 }
 
 .showAnswerButton {
