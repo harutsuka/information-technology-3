@@ -1,11 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
 
-// 💡 実際に使う瞬間まで、createClient の実行を遅らせる関数
-function getSupabaseClient() {
+// 💡 呼び出された瞬間に初めて本物の環境変数でクライアントを作る関数
+function getClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  // Vercelでのビルド時（環境変数がない瞬間）は、落ちないようにダミーでクライアントを作って返す
+  // ビルド時（環境変数がない時）はダミーを返してエラーを回避
   if (!url || !anon) {
     return createClient(
       "https://dummy-url-for-build.supabase.co",
@@ -13,15 +13,20 @@ function getSupabaseClient() {
     );
   }
 
-  // 友達がブラウザでアクセスした時は、ここが実行されて本物のURLとキーで接続される！
+  // 友達がアクセスした時は、100%本物のURLとキーで接続される
   return createClient(url, anon);
 }
 
-// 💡 魔法のプロキシ（Proxy）
-// questions.ts 側の `supabase.from(...)` という書き方を一切変えずに、
-// 裏側で「使う瞬間に getSupabaseClient() を実行する」という動きにすり替えます
-export const supabase = new Proxy({} as any, {
-  get(_, prop) {
-    return (getSupabaseClient() as any)[prop];
+// 💡 他のファイルの「supabase.from」という書き方を1文字も変えずに、
+// 実行時（ブラウザ）に本物を引っ張ってくる一番確実なエクスポート
+export const supabase = {
+  get from() {
+    return getClient().from;
   },
-});
+  get auth() {
+    return getClient().auth;
+  },
+  get storage() {
+    return getClient().storage;
+  },
+};
