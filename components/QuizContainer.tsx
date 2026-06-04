@@ -1,5 +1,5 @@
 "use client";
-import style from "./quizContainer.module.css";
+import style from "./QuizContainer.module.css";
 import { useState } from "react";
 
 export default function QuizContainer({ question }: { question: any }) {
