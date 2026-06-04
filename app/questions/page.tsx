@@ -1,33 +1,24 @@
-"use client";
 import { getQuestions } from "@/lib/questions";
 import Link from "next/link";
-import { filterQuestionsByWeek } from "@/lib/quiz";
-import { useEffect, useState, useMemo } from "react";
 
 export const dynamic = "force-dynamic";
 
-export default function QuestionsPage({ question }: { question: any }) {
-  const [allQuestions, setAllQuestions] = useState<any[] | null>(null);
+// 💡 コンポーネント自体を async にして、直接サーバー側でデータを取得します（useEffectやuseStateは不要に！）
+export default async function QuestionsPage() {
+  let allQuestions: any[] = [];
 
-  const sortedQuestions = useMemo(() => {
-    if (!allQuestions) return [];
-    const sorted = [...allQuestions].sort((a, b) => a.id - b.id);
-    return sorted;
-  }, [allQuestions]);
+  try {
+    // 💡 Vercelのサーバーサイド環境で、本物の環境変数を使って安全にデータを取得します
+    allQuestions = (await getQuestions()) || [];
+  } catch (err) {
+    console.error("Supabaseからのデータ取得に失敗:", err);
+  }
 
-  useEffect(() => {
-    const initializeQuestions = async () => {
-      try {
-        const allQuestions = await getQuestions();
-        setAllQuestions(allQuestions);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    initializeQuestions();
-  }, []);
-  if (!allQuestions) {
-    return <p>読み込み中...</p>;
+  // 💡 サーバー側で事前にID順にソート（useMemoも不要になって超シンプルに！）
+  const sortedQuestions = [...allQuestions].sort((a, b) => a.id - b.id);
+
+  if (sortedQuestions.length === 0) {
+    return <p className="text-center my-8">問題が見つかりませんでした。</p>;
   }
 
   return (
@@ -76,9 +67,6 @@ export default function QuestionsPage({ question }: { question: any }) {
                 <button
                   type="button"
                   disabled
-                  onClick={() => {
-                    console.log(`問題ID ${question.id} のお気に入り切り替え`);
-                  }}
                   className="text-xl active:scale-95 transition-transform focus:outline-none cursor-pointer"
                 >
                   {question.isFavorite ? "⭐️" : "☆"}
