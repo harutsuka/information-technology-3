@@ -2,37 +2,20 @@ import { getQuestions } from "@/lib/questions";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 export default async function QuestionsPage() {
-  let allQuestions: any[] = [];
+  // 💡 1. サーバーサイドで、Supabaseからデータを直に取ってくる（ここでじっと待ちます）
+  const allQuestions = (await getQuestions()) || [];
 
-  // もしビルド中などで環境変数が存在しない場合は、Supabaseを呼び出さずに即座にスキップさせる！
-  // これでビルドワーカーがクラッシュするのを100%物理的に防ぎます。
-  if (
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  ) {
-    console.log("ビルド中のため、Supabaseの呼び出しをスキップしました。");
-  } else {
-    try {
-      // 本番環境（ブラウザからアクセスされた時）は、ここが動いて100%本物のデータが取れる！
-      allQuestions = (await getQuestions()) || [];
-    } catch (err) {
-      console.error("Supabaseからのデータ取得に失敗:", err);
-    }
-  }
+  // 💡 2. 取ってきたデータをその場でソートする（useStateやuseEffectは一切不要！）
+  const sortedQuestions = [...allQuestions].sort((a, b) => a.id - b.id);
 
-  // 💡 安全のために、データがない時は空配列にしておく
-  const sortedQuestions =
-    allQuestions.length > 0
-      ? [...allQuestions].sort((a, b) => a.id - b.id)
-      : [];
-
+  // 💡 3. 万が一データが1件もない場合は、ここで終わり
   if (sortedQuestions.length === 0) {
     return <p className="text-center my-8">問題が見つかりませんでした。</p>;
   }
 
+  // 💡 4. データがある場合は、最初から問題が入ったHTMLをブラウザにドカンと返します！
   return (
     <div className="p-4 max-w-4xl mx-auto flex flex-col gap-8">
       {sortedQuestions.map((question: any) => (
