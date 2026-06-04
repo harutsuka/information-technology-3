@@ -73,6 +73,7 @@ export default function QuestionsPage({ question }: { question: any }) {
                 </span>
                 <button
                   type="button"
+                  disabled
                   onClick={() => {
                     console.log(`問題ID ${question.id} のお気に入り切り替え`);
                   }}
@@ -86,7 +87,7 @@ export default function QuestionsPage({ question }: { question: any }) {
                 <span className="font-bold text-xs text-gray-700">
                   覚えた？
                 </span>
-                <input type="checkbox" />
+                <input type="checkbox" disabled />
               </div>
             </div>
           </div>
