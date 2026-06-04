@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${notoSans.variable} h-full antialiased`}>
+    <html lang="ja" className={`${notoSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col items-center justify-start py-10">
         <Link href="/" className="text-2xl font-bold block">
           情報3 定着確認
