@@ -1,14 +1,23 @@
 "use client";
-import { useState } from "react";
 
-export default function RangeSettings() {
-  const [selectedWeeks, setSelectedWeeks] = useState<number[]>([1]);
-  const [limit, setLimit] = useState(10);
+// 外からデータを受け取るための「型」の定義
+interface RangeSettingsProps {
+  selectedWeeks: number[];
+  setSelectedWeeks: React.Dispatch<React.SetStateAction<number[]>>;
+  limit: number;
+  setLimit: React.Dispatch<React.SetStateAction<number>>;
+}
 
+export default function RangeSettings({
+  selectedWeeks,
+  setSelectedWeeks,
+  limit,
+  setLimit,
+}: RangeSettingsProps) {
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-4">
-        {[1, 2, 3, 4, 5, 6].map((week) => {
+        {[1, 2, 3, 4, 5, 6, 7].map((week) => {
           const isSelected = selectedWeeks.includes(week);
 
           return (
@@ -34,12 +43,22 @@ export default function RangeSettings() {
         })}
       </div>
       <div className="flex items-center gap-2 mb-4">
-        問題数（任意）:
+        問題数:
         <input
           type="number"
           className="ml-2 w-20 px-2 py-1 border rounded"
-          defaultValue={10}
-          onChange={(e) => setLimit(parseInt(e.target.value) || 10)}
+          value={limit} // ここを value に変更
+          onChange={(e) => {
+            const val = e.target.value;
+            // もし空っぽ（BackSpaceで全部消した時）なら、そのまま空にすることを許す
+            if (val === "") {
+              setLimit("" as any);
+              return;
+            }
+            // 数字が入力されたら、0以下のときは1に、それ以外は入力された数字にする
+            const num = parseInt(val, 10);
+            setLimit(isNaN(num) || num < 1 ? 1 : num);
+          }}
         />
       </div>
     </div>
