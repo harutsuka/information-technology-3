@@ -50,7 +50,7 @@ export default function QuizContainer({ question }: { question: any }) {
                     fill="#facc15"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
-                    stroke="currentColor"
+                    stroke="none"
                     className="size-6"
                   >
                     <path

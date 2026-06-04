@@ -7,17 +7,15 @@ import { shuffleQuestions } from "@/lib/quiz";
 import Link from "next/link";
 import QuizContainer from "@/components/QuizContainer";
 
-// 💡 コンポーネント名は元の「QuizPage」のまま一切変えていません
 export default function QuizPage() {
   return (
-    // 💡 ページ全体をただ <Suspense> で囲む形にしました。これで名前を変えずにNext.jsのエラーを回避できます
+    // 💡 ページ全体を <Suspense> で囲む
     <Suspense fallback={<p className="text-center my-8">読み込み中...</p>}>
       <QuizPageContent />
     </Suspense>
   );
 }
 
-// 💡 実際の処理をそのままここに置いておきます
 function QuizPageContent() {
   const [questions, setQuestions] = useState<any[] | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
