@@ -29,6 +29,9 @@ export default function RootLayout({
         </Link>
         <FavoriteProvider>
           {children}
+          <footer className="mt-auto text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} 情報3 定着確認. All rights reserved.
+          </footer>
         </FavoriteProvider>
         <Analytics />
       </body>
