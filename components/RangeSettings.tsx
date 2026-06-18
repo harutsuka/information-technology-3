@@ -17,7 +17,7 @@ export default function RangeSettings({
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-4">
-        {[1, 2, 3, 4, 5, 6, 7].map((week) => {
+        {[1, 2, 3, 4, 5, 6, 7, 9].map((week) => {
           const isSelected = selectedWeeks.includes(week);
 
           return (
@@ -37,7 +37,7 @@ export default function RangeSettings({
                   : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50" // 未選択
               }`}
             >
-              第{week}週
+              第{week}回
             </button>
           );
         })}
