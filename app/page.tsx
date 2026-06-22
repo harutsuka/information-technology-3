@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Home() {
   // ここで選択された週番号と問題数を管理する
-  const [selectedWeeks, setSelectedWeeks] = useState<number[]>([1]);
+  const [selectedWeeks, setSelectedWeeks] = useState<number[]>([9]);
   const [limit, setLimit] = useState(10);
 
   // クイズページに渡すURLを自動で作る（例: /quiz?weeks=1,2&limit=10）
@@ -43,15 +43,15 @@ export default function Home() {
         <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
           <p>
             なにかあれば
-            <a
+            <Link
               href="https://github.com/harutsuka/information-technology-3/issues"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:underline"
             >
               Issue
-            </a>
-            からどうぞ！テスト終わったらアップデートを予定しています...！
+            </Link>
+            をどうぞ！
           </p>
         </div>
       </div>

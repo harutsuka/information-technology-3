@@ -1,6 +1,6 @@
 "use client";
 
-// 外からデータを受け取るための「型」の定義
+// 外からデータを受け取るための型定義
 interface RangeSettingsProps {
   selectedWeeks: number[];
   setSelectedWeeks: React.Dispatch<React.SetStateAction<number[]>>;
@@ -17,7 +17,7 @@ export default function RangeSettings({
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-4">
-        {[1, 2, 3, 4, 5, 6, 7].map((week) => {
+        {[1, 2, 3, 4, 5, 6, 7, 9].map((week) => {
           const isSelected = selectedWeeks.includes(week);
 
           return (
@@ -37,7 +37,7 @@ export default function RangeSettings({
                   : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50" // 未選択
               }`}
             >
-              第{week}週
+              第{week}回
             </button>
           );
         })}
@@ -50,7 +50,6 @@ export default function RangeSettings({
           value={limit} // ここを value に変更
           onChange={(e) => {
             const val = e.target.value;
-            // もし空っぽ（BackSpaceで全部消した時）なら、そのまま空にすることを許す
             if (val === "") {
               setLimit("" as any);
               return;
