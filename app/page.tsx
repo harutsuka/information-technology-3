@@ -40,20 +40,20 @@ export default function Home() {
             🌟 お気に入りの問題を見る
           </div>
         </Link>
-      </div>
-      <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
-        <p>
-          なにかあれば
-          <Link
-            href="https://github.com/harutsuka/information-technology-3/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            Issue
-          </Link>
-          をどうぞ！絶賛アップデート中でバグってるところあって申し訳ないです...🙏
-        </p>
+        <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
+          <p>
+            なにかあれば
+            <Link
+              href="https://github.com/harutsuka/information-technology-3/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              Issue
+            </Link>
+            をどうぞ！絶賛アップデート中でバグってるところあって申し訳ないです...🙏
+          </p>
+        </div>
       </div>
     </main>
   );
