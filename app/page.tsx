@@ -14,6 +14,21 @@ export default function Home() {
   return (
     <main className="container px-6 py-8">
       <div className="flex flex-col items-center gap-4 max-w-md mx-auto p-4">
+        <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
+          <p>バグってて解答表示されないかもです🙇🙇🙇</p>
+          <p>
+            なにかあれば
+            <Link
+              href="https://github.com/harutsuka/information-technology-3/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              Issue
+            </Link>
+            をどうぞ！LaTeX表示できるように修正中です_(._.)_
+          </p>
+        </div>
         <div className="w-full text-center border border-dashed border-gray-300 p-6 rounded-lg mb-2">
           <RangeSettings
             selectedWeeks={selectedWeeks}
@@ -40,20 +55,6 @@ export default function Home() {
             🌟 お気に入りの問題を見る
           </div>
         </Link>
-        <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
-          <p>
-            なにかあれば
-            <Link
-              href="https://github.com/harutsuka/information-technology-3/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
-            >
-              Issue
-            </Link>
-            をどうぞ！LaTeX表示できるように修正中です_(._.)_
-          </p>
-        </div>
       </div>
     </main>
   );
