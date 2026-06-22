@@ -12,6 +12,9 @@ export default function QuizContainer({ question }: { question: any }) {
     setShowAnswer((prev) => !prev);
   };
 
+  const rawAnswer = question.answers;
+  const formattedAnswer = JSON.parse(rawAnswer).join(" / ");
+
   return (
     <div className={style.container}>
       {question && (
@@ -22,7 +25,8 @@ export default function QuizContainer({ question }: { question: any }) {
           </div>
 
           <div className={style.choices}>
-            {question.choices?.length > 0 && (
+            {question.quiz_type == "multiple" ||
+            question.quiz_type == "single" ? (
               <ul>
                 {question.choices.map((choice: string, index: number) => (
                   <li key={index} className={style.choice}>
@@ -30,7 +34,7 @@ export default function QuizContainer({ question }: { question: any }) {
                   </li>
                 ))}
               </ul>
-            )}
+            ) : null}
           </div>
 
           <button className={style.showAnswerButton} onClick={handleShowAnswer}>
@@ -39,7 +43,7 @@ export default function QuizContainer({ question }: { question: any }) {
           {showAnswer && (
             <div className={style.answerContainer}>
               <div className={style.answer}>
-                <p>解答: {question.answer}</p>
+                <p>解答: {formattedAnswer}</p>
               </div>
               <button
                 onClick={() => toggleFavorite(question.id)}

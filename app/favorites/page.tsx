@@ -89,10 +89,12 @@ export default function FavoritesPage() {
                 <span className="font-bold text-blue-700 block mb-1">
                   【解答】
                 </span>
-                <p className="text-gray-800 font-medium">{q.answer}</p>
+                <p className="text-gray-800 font-medium">
+                  {JSON.parse(q.answers).join(", ")}
+                </p>
                 {q.explanation && (
                   <p className="text-xs text-gray-500 mt-2 border-t border-blue-100 pt-2">
-                    解説：{q.explanation}
+                    解説：{q.note}
                   </p>
                 )}
               </div>
