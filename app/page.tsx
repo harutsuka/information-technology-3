@@ -51,7 +51,7 @@ export default function Home() {
             >
               Issue
             </Link>
-            をどうぞ！
+            をどうぞ！LaTeX表示できるように修正中です_(._.)_
           </p>
         </div>
       </div>
