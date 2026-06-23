@@ -1,9 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
 
-export function getSupabase() {
-  console.log("URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+let supabaseClient: ReturnType<typeof createClient> | null = null;
 
-  console.log("KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+export function getSupabase() {
+  if (supabaseClient) {
+    return supabaseClient;
+  }
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -12,5 +14,7 @@ export function getSupabase() {
     return null;
   }
 
-  return createClient(url, key);
+  supabaseClient = createClient(url, key);
+
+  return supabaseClient;
 }
