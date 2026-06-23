@@ -26,7 +26,7 @@ export default function QuizContainer({ question }: { question: any }) {
           </div>
 
           <div className={style.choices}>
-            {question.quiz_type == "multiple" ||
+            {question.quiz_type == "multiple_select" ||
             question.quiz_type == "single" ? (
               <ul>
                 {question.choices.map((choice: string, index: number) => (
