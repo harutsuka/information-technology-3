@@ -15,6 +15,7 @@ export default function QuizContainer({ question }: { question: any }) {
 
   const rawAnswer = question.answers;
   const formattedAnswer = JSON.parse(rawAnswer).join(" / ");
+  const singleChoiceAnswer = JSON.parse(rawAnswer)[0];
 
   return (
     <div className={style.container}>
@@ -45,7 +46,10 @@ export default function QuizContainer({ question }: { question: any }) {
             <div className={style.answerContainer}>
               <div className={style.answer}>
                 <p className="font-bold">
-                  解答: <FormatText text={formattedAnswer} />
+                  解答:{" "}
+                  {question.quiz_type === "short_answer"
+                    ? singleChoiceAnswer
+                    : formattedAnswer}
                 </p>
                 <p className="text-sm mt-2">
                   <FormatText text={question.notes} />

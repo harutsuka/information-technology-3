@@ -91,7 +91,9 @@ export default function FavoritesPage() {
                   【解答】
                 </span>
                 <p className="text-gray-800 font-medium">
-                  <FormatText text={JSON.parse(q.answers).join(", ")} />
+                  {q.quiz_type === "short_answer"
+                    ? JSON.parse(q.answers)[0]
+                    : JSON.parse(q.answers).join(", ")}
                 </p>
                 {q.explanation && (
                   <p className="text-xs text-gray-500 mt-2 border-t border-blue-100 pt-2">
