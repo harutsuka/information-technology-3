@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import StarIcon from "@/components/icons/StarIcon";
+import FormatText from "@/components/FormatText";
 
 export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,14 +28,14 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
             <div className="col-span-2 border-b border-r border-gray-400 p-4 min-h-[80px]">
               <p className="font-bold text-gray-500 text-xs mb-1">【問題文】</p>
               <p className="text-gray-800 font-medium leading-relaxed">
-                {question.question}
+                <FormatText text={question.question} />
               </p>
             </div>
 
             <div className="col-span-1 border-b border-gray-400 p-4 bg-gray-50/50">
               <p className="font-bold text-gray-500 text-xs mb-1">【解答】</p>
               <p className="text-blue-600 font-bold">
-                {JSON.parse(question.answers).join(" / ")}
+                <FormatText text={JSON.parse(question.answers).join(" / ")} />
               </p>
             </div>
 
@@ -46,7 +47,7 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
                       key={index}
                       className="bg-gray-50 px-3 py-1.5 rounded border border-gray-200"
                     >
-                      {choice}
+                      <FormatText text={choice} />
                     </li>
                   ))}
                 </ul>

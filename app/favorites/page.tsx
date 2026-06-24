@@ -4,6 +4,7 @@ import { useFavorites } from "@/lib/favoriteContext";
 import { getQuestions } from "@/lib/questions";
 import Link from "next/link";
 import StarIcon from "@/components/icons/StarIcon";
+import FormatText from "@/components/FormatText";
 
 export default function FavoritesPage() {
   const { favorites, toggleFavorite } = useFavorites();
@@ -69,7 +70,7 @@ export default function FavoritesPage() {
               </div>
 
               <h2 className="text-lg font-bold mb-4 text-gray-800">
-                {q.question}
+                <FormatText text={q.question} />
               </h2>
 
               {q.choices && q.choices.length > 0 && (
@@ -79,7 +80,7 @@ export default function FavoritesPage() {
                       key={index}
                       className="p-3 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-700"
                     >
-                      {choice}
+                      <FormatText text={choice} />
                     </li>
                   ))}
                 </ul>
@@ -90,7 +91,7 @@ export default function FavoritesPage() {
                   【解答】
                 </span>
                 <p className="text-gray-800 font-medium">
-                  {JSON.parse(q.answers).join(", ")}
+                  <FormatText text={JSON.parse(q.answers).join(", ")} />
                 </p>
                 {q.explanation && (
                   <p className="text-xs text-gray-500 mt-2 border-t border-blue-100 pt-2">
