@@ -52,7 +52,7 @@ export default function Home() {
               Issue
             </Link>
             からどうぞ！
-            絶賛アップデート中でバグってるところあったらごめんなさい🙇🙇
+            絶賛アップデート中で不具合あったらごめんなさい🙇🙇
           </p>
         </div>
       </div>
