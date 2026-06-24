@@ -44,7 +44,12 @@ export default function QuizContainer({ question }: { question: any }) {
           {showAnswer && (
             <div className={style.answerContainer}>
               <div className={style.answer}>
-                解答: <FormatText text={formattedAnswer} />
+                <p className="font-bold">
+                  解答: <FormatText text={formattedAnswer} />
+                </p>
+                <p className="text-sm mt-2">
+                  <FormatText text={question.notes} />
+                </p>
               </div>
               <button
                 onClick={() => toggleFavorite(question.id)}
