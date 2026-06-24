@@ -1,11 +1,12 @@
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
-export default function LaTeXText({ text }: { text: string }) {
-  const parts = text.split(/(\$.*?\$)/g); // $で囲まれた部分で分割
+export default function FormatText({ text }: { text: string }) {
+  const formattedText = text.replace(/\\n/g, "\n");
+  const parts = formattedText.split(/(\$.*?\$)/g); // $で囲まれた部分で分割
 
   return (
-    <>
+    <span className="whitespace-pre-wrap">
       {parts.map((part, index) => {
         if (index % 2 === 1) {
           const cleanedPart = part.replace(/^\$/, "").replace(/\$$/, "").trim();
@@ -15,6 +16,6 @@ export default function LaTeXText({ text }: { text: string }) {
         }
         return <span key={index}>{part}</span>;
       })}
-    </>
+    </span>
   );
 }

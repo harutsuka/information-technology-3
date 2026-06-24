@@ -3,7 +3,7 @@ import style from "./QuizContainer.module.css";
 import { useState, useEffect } from "react";
 import { useFavorites } from "@/lib/favoriteContext";
 import StarIcon from "./icons/StarIcon";
-import LaTeXText from "./LaTeXText";
+import FormatText from "./FormatText";
 
 export default function QuizContainer({ question }: { question: any }) {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -22,7 +22,7 @@ export default function QuizContainer({ question }: { question: any }) {
         <div key={question.id}>
           <div className={style.question}>
             <p className={style.week}>第{question.week}回</p>
-            <LaTeXText text={question.question} />
+            <FormatText text={question.question} />
           </div>
 
           <div className={style.choices}>
@@ -31,7 +31,7 @@ export default function QuizContainer({ question }: { question: any }) {
               <ul>
                 {question.choices.map((choice: string, index: number) => (
                   <li key={index} className={style.choice}>
-                    {index + 1}. <LaTeXText text={choice} />
+                    {index + 1}. <FormatText text={choice} />
                   </li>
                 ))}
               </ul>
@@ -44,7 +44,7 @@ export default function QuizContainer({ question }: { question: any }) {
           {showAnswer && (
             <div className={style.answerContainer}>
               <div className={style.answer}>
-                  解答: <LaTeXText text={formattedAnswer} />
+                解答: <FormatText text={formattedAnswer} />
               </div>
               <button
                 onClick={() => toggleFavorite(question.id)}
