@@ -17,7 +17,7 @@ export default function RangeSettings({
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-4">
-        {[1, 2, 3, 4, 5, 6, 7, 9,10].map((week) => {
+        {[1, 2, 3, 4, 5, 6, 7, 9, 10].map((week) => {
           const isSelected = selectedWeeks.includes(week);
 
           return (
@@ -31,7 +31,7 @@ export default function RangeSettings({
                   setSelectedWeeks([...selectedWeeks, week]);
                 }
               }}
-              className={`w-20 py-2 rounded-full border text-sm font-medium transition-colors ${
+              className={`w-18 py-2 rounded-full border text-sm font-medium transition-colors md:w-20 md:text-base ${
                 isSelected
                   ? "bg-main-color text-white" // 選択中
                   : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50" // 未選択
@@ -42,7 +42,7 @@ export default function RangeSettings({
           );
         })}
       </div>
-      <div className="flex items-center gap-2 mb-4">
+      <div className="flex items-center gap-2 mb-4 md:text-lg">
         問題数:
         <input
           type="number"
