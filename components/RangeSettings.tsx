@@ -17,7 +17,7 @@ export default function RangeSettings({
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-4">
-        {[1, 2, 3, 4, 5, 6, 7, 9, 10].map((week) => {
+        {[1, 2, 3, 4, 5, 6, 7, 9, 10,11].map((week) => {
           const isSelected = selectedWeeks.includes(week);
 
           return (
@@ -33,7 +33,7 @@ export default function RangeSettings({
               }}
               className={`w-18 py-2 rounded-full border text-sm font-medium transition-colors md:w-20 md:text-base ${
                 isSelected
-                  ? "bg-main-color text-white" // 選択中
+                  ? "bg-main-color text-white border-none" // 選択中
                   : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50" // 未選択
               }`}
             >
