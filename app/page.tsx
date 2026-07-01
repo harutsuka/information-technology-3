@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default function Home() {
   // ここで選択された週番号と問題数を管理する
-  const [selectedWeeks, setSelectedWeeks] = useState<number[]>([10]);
-  const [limit, setLimit] = useState(11);
+  const [selectedWeeks, setSelectedWeeks] = useState<number[]>([11]);
+  const [limit, setLimit] = useState(10);
 
   // クイズページに渡すURLを自動で作る（例: /quiz?weeks=1,2&limit=10）
   const quizUrl = `/quiz?weeks=${selectedWeeks.join(",")}&limit=${limit}`;
