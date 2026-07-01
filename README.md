@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📄 情報3　定着確認
 
-## Getting Started
+## 📝 概要
+Next.js と TypeScript で開発した、IT・情報処理系のクイズ形式Webアプリケーションです。
+学内の学生をターゲットにしており、毎週の授業内で行われる小テストや定期テストの試験対策ツールとして開発しました。
 
-First, run the development server:
+
+## 🚀 機能一覧
+
+* **多様な出題形式：** 単一選択、複数選択、短答式のクイズに対応。
+* **出題カスタマイズ：** URLパラメータ（`weeks`, `limit`）による、出題範囲（回数）の絞り込みおよび出題問題数の上限設定。
+* **問題のシャッフル機能：** 毎回ランダムな順序で出題され、反復学習をサポート。
+* **お気に入り機能：** 間違えた問題や見直したい問題をストックできる機能。
+* **レスポンシブ対応：** PC・タブレット・スマホそれぞれの画面サイズに最適化したUI。
+
+---
+
+## 📦 技術スタック
+* **フロントエンド:** Next.js (App Router), TypeScript
+* **スタイリング:** Tailwind CSS
+* **バックエンド:** Supabase （クイズデータの管理・配信）
+
+---
+
+## 📐 設計のこだわり・工夫した点
+- **データ管理の効率化（GASの活用）**
+
+    クイズデータの入稿や更新をスムーズに行うため、GoogleスプレッドシートからSupabaseへデータを連携する仕組みをGAS（Google Apps Script）で構築しました。これにより、DBを直接触ることなく安全かつ迅速にデータ管理ができる環境を整えています。
+
+- **ログイン不要で即座に使える利便性**
+
+    ユーザーがテスト直前に1秒でも早く使い始められることを重視し、ユーザー認証（ログイン）を挟まない設計にしました。お気に入りデータはブラウザの localStorage を活用してローカル環境に保存・管理することで、アカウント登録のハードルを無くしつつ、パーソナライズされた学習体験を提供しています。
+
+---
+
+## 🛠 セットアップ方法
 
 ```bash
+# 1. 依存関係のインストール
+npm install
+
+# 2. 開発サーバーの起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
