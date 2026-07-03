@@ -123,7 +123,7 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
           </div>
         ))}
       </div>
-      <div className="flex gap-4 justify-center my-4">
+      <div className="flex gap-2 justify-center my-2">
         {pageNumbers.map((pageNumber) => (
           <button
             key={pageNumber}
