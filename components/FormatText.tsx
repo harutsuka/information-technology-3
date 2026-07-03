@@ -4,10 +4,14 @@ import "katex/dist/katex.min.css";
 export default function FormatText({ text }: { text: string }) {
   const formattedText = text.replace(/\\n/g, "\n");
 
-  if (!formattedText.includes('$')) {
-    return <span className="whitespace-pre-wrap">{formattedText}</span>;
+  if (!formattedText.includes("$")) {
+    return (
+      <span className="whitespace-pre-wrap wrap-break-word">
+        {formattedText}
+      </span>
+    );
   }
-  
+
   const parts = formattedText.split(/(\$.*?\$)/g); // $で囲まれた部分で分割
 
   return (
