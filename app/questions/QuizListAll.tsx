@@ -36,20 +36,23 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
 
   return (
     <div>
-      <select
-        onChange={(e) => {
-          (setSelectedWeek(e.target.value), setCurrentPage(1));
-        }}
-        value={selectedWeek}
-        className="border bg-white border-gray-400 rounded px-2 py-1 mb-4"
-      >
-        <option value="">すべての週</option>
-        {weeks.map((week) => (
-          <option key={week} value={week}>
-            第{week}回
-          </option>
-        ))}
-      </select>
+      <div className="p-4">
+        <select
+          onChange={(e) => {
+            (setSelectedWeek(e.target.value), setCurrentPage(1));
+          }}
+          value={selectedWeek}
+          className="border bg-white border-gray-400 rounded px-2 py-1 mb-4"
+        >
+          <option value="">すべての週</option>
+          {weeks.map((week) => (
+            <option key={week} value={week}>
+              第{week}回
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="p-4 max-w-4xl mx-auto flex flex-col gap-8">
         {currentSlice.map((question: any) => (
           <div key={question.id} className="w-full">
@@ -57,8 +60,8 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
               第{question.week}回
             </div>
 
-            <div className="grid grid-cols-3 border border-gray-400 bg-white">
-              <div className="col-span-2 border-b border-r border-gray-400 p-4 min-h-20">
+            <div className="grid grid-cols-1 md:grid-cols-3 border border-gray-400 bg-white">
+              <div className="col-span-1 md:col-span-2 border-b md:border-r border-gray-400 p-4 min-h-20">
                 <p className="font-bold text-gray-500 text-xs mb-1">
                   【問題文】
                 </p>
@@ -74,7 +77,7 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
                 </p>
               </div>
 
-              <div className="col-span-2 border-r border-gray-400 p-4 bg-white">
+              <div className="col-span-1 md:col-span-2 border-b md:border-r md:border-b-0 border-gray-400 p-4 bg-white">
                 {question.choices && question.choices.length > 0 ? (
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-700">
                     {question.choices.map((choice: string, index: number) => (
@@ -131,7 +134,7 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
           >
             {pageNumber}
           </button>
-        ))}{" "}
+        ))}
       </div>
     </div>
   );
