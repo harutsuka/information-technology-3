@@ -1,5 +1,4 @@
 "use client";
-import style from "./QuizContainer.module.css";
 import { useState, useEffect } from "react";
 import { useFavorites } from "@/lib/favoriteContext";
 import StarIcon from "./icons/StarIcon";
@@ -18,20 +17,23 @@ export default function QuizContainer({ question }: { question: any }) {
   const singleChoiceAnswer = JSON.parse(rawAnswer)[0];
 
   return (
-    <div className={style.container}>
+    <div className="flex flex-col items-stretch gap-4 w-[90%] md:w-4xl">
       {question && (
         <div key={question.id}>
-          <div className={style.question}>
-            <p className={style.week}>第{question.week}回</p>
+          <div className="p-5 border border-button-color rounded-lg h-60 w-full bg-white">
+            <p className="text-[14px] text-gray-600">第{question.week}回</p>
             <FormatText text={question.question} />
           </div>
 
-          <div className={style.choices}>
+          <div className="mt-3">
             {question.quiz_type == "multiple_select" ||
             question.quiz_type == "single" ? (
               <ul>
                 {question.choices.map((choice: string, index: number) => (
-                  <li key={index} className={style.choice}>
+                  <li
+                    key={index}
+                    className="border border-button-color rounded-lg p-3 mt-2 bg-white"
+                  >
                     {index + 1}. <FormatText text={choice} />
                   </li>
                 ))}
@@ -39,12 +41,15 @@ export default function QuizContainer({ question }: { question: any }) {
             ) : null}
           </div>
 
-          <button className={style.showAnswerButton} onClick={handleShowAnswer}>
+          <button
+            className="bg-main-color text-white border-none rounded-lg px-4 py-3 cursor-pointer mt-3 shadow-main font-bold"
+            onClick={handleShowAnswer}
+          >
             解答を表示
           </button>
           {showAnswer && (
-            <div className={style.answerContainer}>
-              <div className={style.answer}>
+            <div className="flex items-center">
+              <div className="border border-button-color rounded-lg p-3 mt-3 bg-white w-[95%]">
                 <p className="font-bold">
                   解答:{" "}
                   {question.quiz_type === "short_answer"
@@ -59,11 +64,13 @@ export default function QuizContainer({ question }: { question: any }) {
                 onClick={() => toggleFavorite(question.id)}
                 className="text-2xl focus:outline-none ml-2"
               >
-                {favorites.includes(question.id) ? (
-                  <StarIcon fill="#facc15" />
-                ) : (
-                  <StarIcon fill="none" stroke="currentColor" />
-                )}
+                <div className="translate-y-1">
+                  {favorites.includes(question.id) ? (
+                    <StarIcon fill="#facc15" />
+                  ) : (
+                    <StarIcon fill="none" stroke="currentColor" />
+                  )}
+                </div>
               </button>
             </div>
           )}
