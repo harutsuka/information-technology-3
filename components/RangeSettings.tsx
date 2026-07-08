@@ -17,7 +17,7 @@ export default function RangeSettings({
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-4">
-        {[1, 2, 3, 4, 5, 6, 7, 9, 10,11].map((week) => {
+        {[1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12].map((week) => {
           const isSelected = selectedWeeks.includes(week);
 
           return (

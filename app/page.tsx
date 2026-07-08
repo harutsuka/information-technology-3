@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Home() {
   // ここで選択された週番号と問題数を管理する
-  const [selectedWeeks, setSelectedWeeks] = useState<number[]>([11]);
+  const [selectedWeeks, setSelectedWeeks] = useState<number[]>([12]);
   const [limit, setLimit] = useState(10);
 
   // クイズページに渡すURLを自動で作る（例: /quiz?weeks=1,2&limit=10）
@@ -43,7 +43,7 @@ export default function Home() {
           </Link>
 
           <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
-            <p>絶賛アップデート中で不具合あったらごめんなさい🙇🙇</p>
+            <p>問題一覧で週のフィルターが使えるようになりました！</p>
           </div>
         </div>
       </div>

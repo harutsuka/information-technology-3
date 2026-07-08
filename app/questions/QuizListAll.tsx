@@ -68,6 +68,7 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
                 <p className="text-gray-800 font-medium leading-relaxed">
                   <FormatText text={question.question} />
                 </p>
+                <p className="text-gray-500 text-sm mt-1">{question.notes}</p>
               </div>
 
               <div className="col-span-1 border-b border-gray-400 p-4 bg-gray-50/50">
