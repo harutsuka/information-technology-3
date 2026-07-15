@@ -24,7 +24,7 @@ export default function MasteredPage() {
     fetchData();
   }, []);
 
-  const fetchMasteredQuestions = allQuestions.filter((q) =>
+  const filteredMasteredQuestions = allQuestions.filter((q) =>
     masteredQuestions.includes(q.id),
   );
 
@@ -40,11 +40,11 @@ export default function MasteredPage() {
     <main className="container px-6 py-8">
       <h1 className="text-xl font-bold mb-6 text-center">覚えた問題</h1>
 
-      {fetchMasteredQuestions.length === 0 ? (
+      {filteredMasteredQuestions.length === 0 ? (
         <p className="text-center text-gray-500">覚えた問題はありません。</p>
       ) : (
         <div className="space-y-6 max-w-2xl mx-auto">
-          {fetchMasteredQuestions.map((q) => (
+          {filteredMasteredQuestions.map((q) => (
             <div
               key={q.id}
               className="border border-gray-300 rounded-xl p-6 bg-white shadow-main relative"
