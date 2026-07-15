@@ -13,8 +13,16 @@ const MasteredContext = createContext<MasteredContextType | undefined>(
 export function MasteredProvider({ children }: { children: React.ReactNode }) {
   const [mastered, setMastered] = useState<number[]>(() => {
     if (typeof window === "undefined") return [];
-    const saved = localStorage.getItem("quiz_mastered");
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem("quiz_mastered");
+      return saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      console.error(
+        "Failed to parse mastered questions from localStorage:",
+        error,
+      );
+      return [];
+    }
   });
 
   useEffect(() => {
@@ -24,13 +32,15 @@ export function MasteredProvider({ children }: { children: React.ReactNode }) {
   }, [mastered]);
 
   const toggleMastered = (id: number) => {
-    let updated: number[];
-    if (mastered.includes(id)) {
-      updated = mastered.filter((masteredId) => masteredId !== id);
-    } else {
-      updated = [...mastered, id];
-    }
-    setMastered(updated);
+    setMastered((prev) => {
+      let updated: number[];
+      if (prev.includes(id)) {
+        updated = prev.filter((masteredId) => masteredId !== id);
+      } else {
+        updated = [...prev, id];
+      }
+      return updated;
+    });
   };
 
   return (
