@@ -120,14 +120,14 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
                 <div className="p-3 flex items-center justify-between gap-1">
                   <label className="font-bold text-xs text-gray-700">
                     覚えた？
+                    <input
+                      type="checkbox"
+                      checked={masteredQuestions.includes(question.id)}
+                      onChange={() => toggleMastered(question.id)}
+                      className="scale-150 cursor-pointer mr-1"
+                      aria-label="覚えた問題に追加"
+                    />
                   </label>
-                  <input
-                    type="checkbox"
-                    checked={masteredQuestions.includes(question.id)}
-                    onChange={() => toggleMastered(question.id)}
-                    className="scale-150 cursor-pointer mr-1"
-                    aria-label="覚えた問題に追加"
-                  />
                 </div>
               </div>
             </div>
