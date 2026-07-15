@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import StarIcon from "@/components/icons/StarIcon";
 import FormatText from "@/components/FormatText";
 import { useFavorites } from "@/lib/favoriteContext";
+import { useMastered } from "@/lib/masteredContext";
 
 export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedWeek, setSelectedWeek] = useState<string>("");
   const { favorites, toggleFavorite } = useFavorites();
+  const { masteredQuestions, toggleMastered } = useMastered();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -116,10 +118,16 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
                 </div>
 
                 <div className="p-3 flex items-center justify-between gap-1">
-                  <span className="font-bold text-xs text-gray-700">
+                  <label className="font-bold text-xs text-gray-700">
                     覚えた？
-                  </span>
-                  <input type="checkbox" disabled />
+                    <input
+                      type="checkbox"
+                      checked={masteredQuestions.includes(question.id)}
+                      onChange={() => toggleMastered(question.id)}
+                      className="scale-150 cursor-pointer mr-1"
+                      aria-label="覚えた問題に追加"
+                    />
+                  </label>
                 </div>
               </div>
             </div>

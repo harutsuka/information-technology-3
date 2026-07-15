@@ -1,23 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useFavorites } from "@/lib/favoriteContext";
+import { useMastered } from "@/lib/masteredContext";
 import { getQuestions } from "@/lib/questions";
-import StarIcon from "@/components/icons/StarIcon";
 import FormatText from "@/components/FormatText";
 
-export default function FavoritesPage() {
-  const { favorites, toggleFavorite } = useFavorites();
-
-  // 2. Supabaseから取得した全問題を置いておく「箱（State）」を作る
+export default function MasteredPage() {
+  const { masteredQuestions, toggleMastered } = useMastered();
   const [allQuestions, setAllQuestions] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // 3. 画面が開いた瞬間に、非同期（async）でSupabaseからデータを取ってくる
   useEffect(() => {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const data = await getQuestions(); // 💡 ここで async/await を使う！
+        const data = await getQuestions();
         setAllQuestions(data || []);
       } catch (error) {
         console.error("問題の取得に失敗しました:", error);
@@ -28,12 +24,10 @@ export default function FavoritesPage() {
     fetchData();
   }, []);
 
-  // 4. お気に入りに入っているIDだけの問題データをフィルタリング
-  const fetchFavoriteQuestions = allQuestions.filter((q) =>
-    favorites.includes(q.id),
+  const filteredMasteredQuestions = allQuestions.filter((q) =>
+    masteredQuestions.includes(q.id),
   );
 
-  // 5. 読み込み中の表示（データが届くまでのプレースホルダー）
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen text-gray-500">
@@ -44,25 +38,24 @@ export default function FavoritesPage() {
 
   return (
     <main className="container px-6 py-8">
-      <h1 className="text-xl font-bold mb-6 text-center">お気に入りの問題</h1>
+      <h1 className="text-xl font-bold mb-6 text-center">覚えた問題</h1>
 
-      {fetchFavoriteQuestions.length === 0 ? (
-        <p className="text-center text-gray-500">
-          お気に入りの問題はありません。
-        </p>
+      {filteredMasteredQuestions.length === 0 ? (
+        <p className="text-center text-gray-500">覚えた問題はありません。</p>
       ) : (
         <div className="space-y-6 max-w-2xl mx-auto">
-          {fetchFavoriteQuestions.map((q) => (
+          {filteredMasteredQuestions.map((q) => (
             <div
               key={q.id}
               className="border border-gray-300 rounded-xl p-6 bg-white shadow-main relative"
             >
-              <button
-                onClick={() => toggleFavorite(q.id)}
-                className="absolute top-4 right-4 text-2xl focus:outline-none"
-              >
-                <StarIcon fill="#facc15" />
-              </button>
+              <input
+                type="checkbox"
+                onChange={() => toggleMastered(q.id)}
+                checked={masteredQuestions.includes(q.id)}
+                className="scale-150 absolute top-6 right-6"
+                aria-label="覚えた問題に追加"
+              />
 
               <div className="text-sm text-gray-500 mb-2 font-semibold">
                 第{q.week}回

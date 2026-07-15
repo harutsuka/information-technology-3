@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { FavoriteProvider } from "@/lib/favoriteContext";
+import { MasteredProvider } from "@/lib/masteredContext";
 
 const notoSans = Noto_Sans_JP({
   subsets: ["latin"],
@@ -32,11 +33,13 @@ export default function RootLayout({
           情報3 定着確認
         </Link>
         <FavoriteProvider>
-          {children}
-          <footer className="mt-auto text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} 情報3 定着確認. All rights
-            reserved.
-          </footer>
+          <MasteredProvider>
+            {children}
+            <footer className="mt-auto text-sm text-gray-500">
+              &copy; {new Date().getFullYear()} 情報3 定着確認. All rights
+              reserved.
+            </footer>
+          </MasteredProvider>
         </FavoriteProvider>
         <Analytics />
       </body>

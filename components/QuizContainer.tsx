@@ -1,12 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useFavorites } from "@/lib/favoriteContext";
 import StarIcon from "./icons/StarIcon";
 import FormatText from "./FormatText";
+import { useMastered } from "@/lib/masteredContext";
 
 export default function QuizContainer({ question }: { question: any }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const { favorites, toggleFavorite } = useFavorites();
+  const { masteredQuestions, toggleMastered } = useMastered();
 
   const handleShowAnswer = () => {
     setShowAnswer((prev) => !prev);
@@ -49,7 +51,7 @@ export default function QuizContainer({ question }: { question: any }) {
           </button>
           {showAnswer && (
             <div className="flex items-center">
-              <div className="border border-button-color rounded-lg p-3 mt-3 bg-white w-[95%]">
+              <div className="border border-button-color rounded-lg p-3 mt-3 bg-white w-[93%]">
                 <p className="font-bold">
                   解答:{" "}
                   {question.quiz_type === "short_answer"
@@ -60,18 +62,29 @@ export default function QuizContainer({ question }: { question: any }) {
                   <FormatText text={question.notes} />
                 </p>
               </div>
-              <button
-                onClick={() => toggleFavorite(question.id)}
-                className="text-2xl focus:outline-none ml-2"
-              >
-                <div className="translate-y-1">
+              <div className="translate-y-1 flex items-center justify-center gap-3">
+                <button
+                  onClick={() => toggleFavorite(question.id)}
+                  aria-label="お気に入りに追加"
+                  aria-pressed={favorites.includes(question.id)}
+                  className="text-2xl cursor-pointer focus:outline-none ml-2"
+                >
                   {favorites.includes(question.id) ? (
                     <StarIcon fill="#facc15" />
                   ) : (
                     <StarIcon fill="none" stroke="currentColor" />
                   )}
+                </button>
+                <div>
+                  <input
+                    type="checkbox"
+                    checked={masteredQuestions.includes(question.id)}
+                    onChange={() => toggleMastered(question.id)}
+                    className="scale-150 cursor-pointer"
+                    aria-label="覚えた問題に追加"
+                  />
                 </div>
-              </button>
+              </div>
             </div>
           )}
         </div>
