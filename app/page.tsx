@@ -41,7 +41,11 @@ export default function Home() {
               🌟 お気に入りの問題を見る
             </div>
           </Link>
-
+          <Link href="/mastered" className="w-full inline-block">
+            <div className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-4 px-6 rounded-lg text-center shadow-main transition-colors">
+              ☑️ 覚えた問題を見る
+            </div>
+          </Link>
           <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
             <p>問題一覧で週のフィルターが使えるようになりました！</p>
           </div>
