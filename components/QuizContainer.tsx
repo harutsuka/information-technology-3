@@ -62,11 +62,13 @@ export default function QuizContainer({ question }: { question: any }) {
                   <FormatText text={question.notes} />
                 </p>
               </div>
-              <button
-                onClick={() => toggleFavorite(question.id)}
-                className="text-2xl focus:outline-none ml-2"
-              >
-                <div className="translate-y-1">
+              <div className="translate-y-1 flex items-center justify-center gap-3">
+                <button
+                  onClick={() => toggleFavorite(question.id)}
+                  aria-label="Toggle Favorite"
+                  aria-pressed={favorites.includes(question.id)}
+                  className="text-2xl cursor-pointer focus:outline-none ml-2"
+                >
                   {favorites.includes(question.id) ? (
                     <StarIcon fill="#facc15" />
                   ) : (
@@ -81,7 +83,7 @@ export default function QuizContainer({ question }: { question: any }) {
                     className="scale-160 cursor-pointer"
                   />
                 </div>
-              </button>
+              </div>
             </div>
           )}
         </div>

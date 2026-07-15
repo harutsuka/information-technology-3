@@ -31,13 +31,13 @@ export default function Home() {
           </Link>
 
           <Link href="/questions" className="w-full inline-block">
-            <div className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg text-center shadow-main transition-colors">
+            <div className="bg-slate-500 hover:bg-slate-600 text-white font-bold py-4 px-6 rounded-lg text-center shadow-main transition-colors">
               📕 問題一覧を見る
             </div>
           </Link>
 
           <Link href="/favorites" className="w-full inline-block">
-            <div className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg text-center shadow-main transition-colors">
+            <div className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-6 rounded-lg text-center shadow-main transition-colors">
               🌟 お気に入りの問題を見る
             </div>
           </Link>
