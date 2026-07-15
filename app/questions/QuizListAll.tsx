@@ -2,10 +2,12 @@
 import { useState, useEffect } from "react";
 import StarIcon from "@/components/icons/StarIcon";
 import FormatText from "@/components/FormatText";
+import { useFavorites } from "@/lib/favoriteContext";
 
 export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedWeek, setSelectedWeek] = useState<string>("");
+  const { favorites, toggleFavorite } = useFavorites();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -102,10 +104,10 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
                   </span>
                   <button
                     type="button"
-                    disabled
+                    onClick={() => toggleFavorite(question.id)}
                     className="text-xl active:scale-95 transition-transform focus:outline-none cursor-pointer"
                   >
-                    {question.isFavorite ? (
+                    {favorites.includes(question.id) ? (
                       <StarIcon fill="#facc15" />
                     ) : (
                       <StarIcon fill="none" stroke="currentColor" />
