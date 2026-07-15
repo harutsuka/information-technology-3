@@ -57,7 +57,7 @@ export default function MasteredPage() {
                 onChange={() => toggleMastered(q.id)}
                 checked={masteredQuestions.includes(q.id)}
                 className="scale-150 absolute top-6 right-6"
-                readOnly
+                aria-label="覚えた問題に追加"
               />
 
               <div className="text-sm text-gray-500 mb-2 font-semibold">

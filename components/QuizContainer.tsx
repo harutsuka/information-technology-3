@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useFavorites } from "@/lib/favoriteContext";
 import StarIcon from "./icons/StarIcon";
 import FormatText from "./FormatText";
@@ -65,7 +65,7 @@ export default function QuizContainer({ question }: { question: any }) {
               <div className="translate-y-1 flex items-center justify-center gap-3">
                 <button
                   onClick={() => toggleFavorite(question.id)}
-                  aria-label="Toggle Favorite"
+                  aria-label="お気に入りに追加"
                   aria-pressed={favorites.includes(question.id)}
                   className="text-2xl cursor-pointer focus:outline-none ml-2"
                 >
@@ -80,7 +80,8 @@ export default function QuizContainer({ question }: { question: any }) {
                     type="checkbox"
                     checked={masteredQuestions.includes(question.id)}
                     onChange={() => toggleMastered(question.id)}
-                    className="scale-160 cursor-pointer"
+                    className="scale-150 cursor-pointer"
+                    aria-label="覚えた問題に追加"
                   />
                 </div>
               </div>
