@@ -2,10 +2,7 @@
 import { useState, useEffect } from "react";
 import { useMastered } from "@/lib/masteredContext";
 import { getQuestions } from "@/lib/questions";
-import Link from "next/link";
-import StarIcon from "@/components/icons/StarIcon";
 import FormatText from "@/components/FormatText";
-import QuizContainer from "@/components/QuizContainer";
 
 export default function MasteredPage() {
   const { masteredQuestions, toggleMastered } = useMastered();
@@ -90,7 +87,7 @@ export default function MasteredPage() {
                     ? JSON.parse(q.answers)[0]
                     : JSON.parse(q.answers).join(", ")}
                 </p>
-                {q.explanation && (
+                {q.note && (
                   <p className="text-xs text-gray-500 mt-2 border-t border-blue-100 pt-2">
                     解説：{q.note}
                   </p>

@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useFavorites } from "@/lib/favoriteContext";
 import { getQuestions } from "@/lib/questions";
-import Link from "next/link";
 import StarIcon from "@/components/icons/StarIcon";
 import FormatText from "@/components/FormatText";
 
@@ -95,7 +94,7 @@ export default function FavoritesPage() {
                     ? JSON.parse(q.answers)[0]
                     : JSON.parse(q.answers).join(", ")}
                 </p>
-                {q.explanation && (
+                {q.note && (
                   <p className="text-xs text-gray-500 mt-2 border-t border-blue-100 pt-2">
                     解説：{q.note}
                   </p>
