@@ -30,9 +30,9 @@ export function FavoriteProvider({ children }: { children: React.ReactNode }) {
   // 画面起動時にブラウザから読み込み
   useEffect(() => {
     if (typeof window !== "undefined") {
-      localStorage.setItem("quiz_favorite", JSON.stringify(favorites));
+      localStorage.setItem("quiz_favorites", JSON.stringify(favorites));
     }
-  }, []);
+  }, [favorites]);
 
   // お気に入りの切り替え関数
   const toggleFavorite = (id: number) => {
