@@ -12,7 +12,7 @@ export default function StarIcon({
       stroke={stroke || "none"}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
-      className="size-6"
+      className="size-8"
     >
       <path
         strokeLinecap="round"
