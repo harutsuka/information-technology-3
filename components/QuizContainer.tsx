@@ -19,7 +19,7 @@ export default function QuizContainer({ question }: { question: any }) {
   const singleChoiceAnswer = JSON.parse(rawAnswer)[0];
 
   return (
-    <div className="flex flex-col items-stretch gap-4 w-[90%] md:w-4xl">
+    <div className="flex flex-col items-stretch gap-4 w-full md:w-4xl">
       {question && (
         <div key={question.id}>
           <div className="p-5 border border-button-color rounded-lg h-60 w-full bg-white">

@@ -59,6 +59,8 @@ export default function FavoritesPage() {
             >
               <button
                 onClick={() => toggleFavorite(q.id)}
+                aria-label="お気に入りに追加"
+                aria-pressed={favorites.includes(q.id)}
                 className="absolute top-4 right-4 text-2xl focus:outline-none"
               >
                 <StarIcon fill="#facc15" />
