@@ -107,6 +107,8 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
                   <button
                     type="button"
                     onClick={() => toggleFavorite(question.id)}
+                    aria-label="お気に入りに追加"
+                    aria-pressed={favorites.includes(question.id)}
                     className="text-xl active:scale-95 transition-transform focus:outline-none cursor-pointer"
                   >
                     {favorites.includes(question.id) ? (
