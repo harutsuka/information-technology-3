@@ -6,6 +6,8 @@ import { filterQuestionsByWeek } from "@/lib/quiz";
 import { shuffleQuestions } from "@/lib/quiz";
 import Link from "next/link";
 import QuizContainer from "@/components/QuizContainer";
+import { useFavorites } from "@/lib/favoriteContext";
+import { useMastered } from "@/lib/masteredContext";
 
 export default function QuizPage() {
   return (
@@ -19,6 +21,8 @@ export default function QuizPage() {
 function QuizPageContent() {
   const [questions, setQuestions] = useState<any[] | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { favorites } = useFavorites();
+  const { masteredQuestions } = useMastered();
   const currentQuestion = questions?.[currentIndex];
 
   const searchParams = useSearchParams();
@@ -27,6 +31,8 @@ function QuizPageContent() {
 
   const selectedWeeks = weeksParam ? weeksParam.split(",").map(Number) : [1];
   const limit = limitParam ? parseInt(limitParam) : 10;
+  const favoriteParam = searchParams.get("onlyFavorites");
+  const masteredParam = searchParams.get("excludeMastered");
 
   const handleNextQuestion = () => {
     if (questions && currentIndex < questions.length - 1) {
@@ -42,7 +48,19 @@ function QuizPageContent() {
           allQuestions,
           selectedWeeks,
         );
-        const shuffledQuestions = shuffleQuestions([...filteredQuestions]);
+
+        let currentQuestions = filteredQuestions;
+        if (favoriteParam === "true") {
+          currentQuestions = currentQuestions.filter((question) =>
+            favorites.includes(question.id),
+          );
+        }
+        if (masteredParam === "true") {
+          currentQuestions = currentQuestions.filter(
+            (question) => !masteredQuestions.includes(question.id),
+          );
+        }
+        const shuffledQuestions = shuffleQuestions([...currentQuestions]);
         const limitedQuestions = shuffledQuestions.slice(0, limit);
         setQuestions(limitedQuestions);
       } catch (err) {
@@ -50,7 +68,14 @@ function QuizPageContent() {
       }
     };
     initializeQuestions();
-  }, [weeksParam, limitParam]);
+  }, [
+    weeksParam,
+    limitParam,
+    favoriteParam,
+    masteredParam,
+    favorites,
+    masteredQuestions,
+  ]);
 
   if (!questions) {
     return <p className="text-center my-8">読み込み中...</p>;

@@ -20,6 +20,10 @@ export default function Home() {
             setSelectedWeeks={setSelectedWeeks}
             limit={limit}
             setLimit={setLimit}
+            onlyFavorites={onlyFavorites}
+            setOnlyFavorites={setOnlyFavorites}
+            excludeMastered={excludeMastered}
+            setExcludeMastered={setExcludeMastered}
           />
         </div>
         <div className="flex flex-col gap-4 w-full">
