@@ -71,7 +71,7 @@ export default function Home() {
             </div>
           </Link>
           <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
-            <p>問題一覧で週のフィルターが使えるようになりました！</p>
+            <p>お気に入りの問題・覚えた問題でフィルターして出題できるようになりました！</p>
           </div>
         </div>
       </div>
