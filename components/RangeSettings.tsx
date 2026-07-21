@@ -6,6 +6,10 @@ interface RangeSettingsProps {
   setSelectedWeeks: React.Dispatch<React.SetStateAction<number[]>>;
   limit: number;
   setLimit: React.Dispatch<React.SetStateAction<number>>;
+  onlyFavorites: boolean;
+  setOnlyFavorites: React.Dispatch<React.SetStateAction<boolean>>;
+  excludeMastered: boolean;
+  setExcludeMastered: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function RangeSettings({
@@ -13,6 +17,10 @@ export default function RangeSettings({
   setSelectedWeeks,
   limit,
   setLimit,
+  onlyFavorites,
+  setOnlyFavorites,
+  excludeMastered,
+  setExcludeMastered,
 }: RangeSettingsProps) {
   return (
     <div>
@@ -59,6 +67,24 @@ export default function RangeSettings({
             setLimit(isNaN(num) || num < 1 ? 1 : num);
           }}
         />
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-2 text-lg">
+          <input
+            type="checkbox"
+            checked={onlyFavorites}
+            onChange={() => setOnlyFavorites(!onlyFavorites)}
+          />
+          お気に入りの問題からのみ出題する
+        </div>
+        <div className="flex items-center gap-2 text-lg">
+          <input
+            type="checkbox"
+            checked={excludeMastered}
+            onChange={() => setExcludeMastered(!excludeMastered)}
+          />
+          覚えた問題を出題しない
+        </div>
       </div>
     </div>
   );
