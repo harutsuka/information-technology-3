@@ -60,5 +60,5 @@ textarea {
 }
 
 input[type="checkbox"] {
-  scale: 1.5;
+  transform: scale(1.5);
 }
