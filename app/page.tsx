@@ -1,15 +1,38 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RangeSettings from "@/components/RangeSettings";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function Home() {
-  // ここで選択された週番号と問題数を管理する
   const [selectedWeeks, setSelectedWeeks] = useState<number[]>([12]);
   const [limit, setLimit] = useState(10);
+  const [onlyFavorites, setOnlyFavorites] = useState(false);
+  const [excludeMastered, setExcludeMastered] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // クイズページに渡すURLを自動で作る（例: /quiz?weeks=1,2&limit=10）
-  const quizUrl = `/quiz?weeks=${selectedWeeks.join(",")}&limit=${limit}`;
+  const searchParams = useSearchParams();
+
+  // 画面が開いた時に読み込み
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem("onlyFavorites");
+    const savedMastered = localStorage.getItem("excludeMastered");
+
+    if (savedFavorites !== null) setOnlyFavorites(savedFavorites === "true");
+    if (savedMastered !== null) setExcludeMastered(savedMastered === "true");
+
+    setIsLoaded(true);
+  }, []);
+
+  // isLoaded が true になるまでは保存処理をスキップする
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    localStorage.setItem("onlyFavorites", onlyFavorites.toString());
+    localStorage.setItem("excludeMastered", excludeMastered.toString());
+  }, [onlyFavorites, excludeMastered, isLoaded]);
+
+  const quizUrl = `/quiz?weeks=${selectedWeeks.join(",")}&limit=${limit}${onlyFavorites ? `&onlyFavorites=${onlyFavorites}` : ""}${excludeMastered ? `&excludeMastered=${excludeMastered}` : ""}`;
 
   return (
     <main className="container px-6 py-4 mx-auto md:pt-24 md:flex md:flex-col md:px-16">
