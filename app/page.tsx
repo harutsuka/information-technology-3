@@ -12,8 +12,8 @@ export default function Home() {
 
   // 画面が開いた時に読み込み
   useEffect(() => {
-    const savedFavorites = localStorage.getItem("onlyFavorites");
-    const savedMastered = localStorage.getItem("excludeMastered");
+    const savedFavorites = localStorage.getItem("quiz_onlyFavorites");
+    const savedMastered = localStorage.getItem("quiz_excludeMastered");
 
     if (savedFavorites !== null) setOnlyFavorites(savedFavorites === "true");
     if (savedMastered !== null) setExcludeMastered(savedMastered === "true");
@@ -25,8 +25,8 @@ export default function Home() {
   useEffect(() => {
     if (!isLoaded) return;
 
-    localStorage.setItem("onlyFavorites", onlyFavorites.toString());
-    localStorage.setItem("excludeMastered", excludeMastered.toString());
+    localStorage.setItem("quiz_onlyFavorites", onlyFavorites.toString());
+    localStorage.setItem("quiz_excludeMastered", excludeMastered.toString());
   }, [onlyFavorites, excludeMastered, isLoaded]);
 
   const quizUrl = `/quiz?weeks=${selectedWeeks.join(",")}&limit=${limit}${onlyFavorites ? `&onlyFavorites=${onlyFavorites}` : ""}${excludeMastered ? `&excludeMastered=${excludeMastered}` : ""}`;
