@@ -80,7 +80,7 @@ export default function QuizContainer({ question }: { question: any }) {
                     type="checkbox"
                     checked={masteredQuestions.includes(question.id)}
                     onChange={() => toggleMastered(question.id)}
-                    className="scale-150 cursor-pointer"
+                    className="cursor-pointer"
                     aria-label="覚えた問題に追加"
                   />
                 </div>

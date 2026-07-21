@@ -58,3 +58,7 @@ textarea {
     Arial, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
     sans-serif !important;
 }
+
+input[type="checkbox"] {
+  scale: 1.5;
+}

@@ -53,7 +53,7 @@ export default function MasteredPage() {
                 type="checkbox"
                 onChange={() => toggleMastered(q.id)}
                 checked={masteredQuestions.includes(q.id)}
-                className="scale-150 absolute top-6 right-6"
+                className="absolute top-6 right-6"
                 aria-label="覚えた問題に追加"
               />
 
