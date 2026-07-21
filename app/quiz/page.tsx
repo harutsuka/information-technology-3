@@ -63,6 +63,9 @@ function QuizPageContent() {
         const shuffledQuestions = shuffleQuestions([...currentQuestions]);
         const limitedQuestions = shuffledQuestions.slice(0, limit);
         setQuestions(limitedQuestions);
+        setCurrentIndex((prev) =>
+          Math.min(prev, Math.max(limitedQuestions.length - 1, 0)),
+        );
       } catch (err) {
         console.error(err);
       }
