@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import RangeSettings from "@/components/RangeSettings";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 export default function Home() {
   const [selectedWeeks, setSelectedWeeks] = useState<number[]>([12]);
@@ -10,8 +9,6 @@ export default function Home() {
   const [onlyFavorites, setOnlyFavorites] = useState(false);
   const [excludeMastered, setExcludeMastered] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const searchParams = useSearchParams();
 
   // 画面が開いた時に読み込み
   useEffect(() => {
