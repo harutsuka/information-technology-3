@@ -4,7 +4,7 @@ import RangeSettings from "@/components/RangeSettings";
 import Link from "next/link";
 
 export default function Home() {
-  const [selectedWeeks, setSelectedWeeks] = useState<number[]>([12]);
+  const [selectedWeeks, setSelectedWeeks] = useState<number[]>([1]);
   const [limit, setLimit] = useState(10);
   const [onlyFavorites, setOnlyFavorites] = useState(false);
   const [excludeMastered, setExcludeMastered] = useState(false);

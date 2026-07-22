@@ -25,7 +25,7 @@ export default function RangeSettings({
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-4">
-        {[1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12].map((week) => {
+        {[1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14].map((week) => {
           const isSelected = selectedWeeks.includes(week);
 
           return (
@@ -51,7 +51,7 @@ export default function RangeSettings({
         })}
       </div>
       <div className="flex items-center gap-2 mb-4 md:text-lg">
-        問題数:
+        問題数(上限):
         <input
           type="number"
           className="ml-2 w-20 px-2 py-1 border rounded"
