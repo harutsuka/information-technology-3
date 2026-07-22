@@ -10,6 +10,8 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
   const [selectedWeek, setSelectedWeek] = useState<string>("");
   const { favorites, toggleFavorite } = useFavorites();
   const { masteredQuestions, toggleMastered } = useMastered();
+  const [onlyFavorites, setOnlyFavorites] = useState(false);
+  const [excludeMastered, setExcludeMastered] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -20,9 +22,22 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
   );
   const sortedQuestions = [...allQuestions].sort((a, b) => a.id - b.id);
 
-  const filteredQuestions = selectedWeek
-    ? sortedQuestions.filter((q) => q.week === Number(selectedWeek))
-    : sortedQuestions;
+  let filteredQuestions = sortedQuestions;
+  if (selectedWeek) {
+    filteredQuestions = filteredQuestions.filter(
+      (q) => q.week === Number(selectedWeek),
+    );
+  }
+  if (onlyFavorites) {
+    filteredQuestions = filteredQuestions.filter((q) =>
+      favorites.includes(q.id),
+    );
+  }
+  if (excludeMastered) {
+    filteredQuestions = filteredQuestions.filter(
+      (q) => !masteredQuestions.includes(q.id),
+    );
+  }
 
   const sliceSize = 30;
   const currentSlice = filteredQuestions.slice(
@@ -40,13 +55,13 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
 
   return (
     <div>
-      <div className="p-4">
+      <div className="p-4 flex flex-col gap-4 flex-wrap md:flex-row md:items-center">
         <select
           onChange={(e) => {
             (setSelectedWeek(e.target.value), setCurrentPage(1));
           }}
           value={selectedWeek}
-          className="border bg-white border-gray-400 rounded px-2 py-1 mb-4"
+          className="border bg-white border-gray-400 rounded px-2 py-1"
         >
           <option value="">すべての週</option>
           {weeks.map((week) => (
@@ -55,6 +70,30 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
             </option>
           ))}
         </select>
+        <div className="flex gap-2">
+          <input
+            type="checkbox"
+            id="onlyFavorites"
+            checked={onlyFavorites}
+            className="ml-4"
+            onChange={() => {
+              setOnlyFavorites(!onlyFavorites);
+            }}
+          />
+          お気に入りのみ表示する
+        </div>
+        <div className="flex gap-2">
+          <input
+            type="checkbox"
+            id="excludeMastered"
+            checked={excludeMastered}
+            className="ml-4"
+            onChange={() => {
+              setExcludeMastered(!excludeMastered);
+            }}
+          />
+          覚えた問題を表示しない
+        </div>
       </div>
 
       <div className="p-4 max-w-4xl mx-auto flex flex-col gap-8">
