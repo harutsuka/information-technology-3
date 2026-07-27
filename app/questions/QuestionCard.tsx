@@ -32,7 +32,6 @@ export default function QuestionCard({
             <p className="text-gray-800 font-medium leading-relaxed">
               <FormatText text={question.question} />
             </p>
-            <p className="text-gray-500 text-sm mt-1">{question.notes}</p>
           </div>
 
           <div className="col-span-1 border-b border-gray-400 p-4 bg-gray-50/50">
@@ -55,6 +54,7 @@ export default function QuestionCard({
                 <FormatText text={JSON.parse(question.answers).join(" / ")} />
               </p>
             )}
+            <p className="text-gray-500 text-sm mt-1">{question.notes}</p>
           </div>
 
           <div className="col-span-1 md:col-span-2 border-b md:border-r md:border-b-0 border-gray-400 p-4 bg-white">
