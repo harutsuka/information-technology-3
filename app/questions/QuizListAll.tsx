@@ -73,7 +73,7 @@ export default function QuizListAll({ allQuestions }: { allQuestions: any[] }) {
 
         <div className="flex items-center justify-between gap-2">
           <span className="font-medium text-gray-700">
-            解答をタップして表示
+            タップして解答を表示
           </span>
           <button
             type="button"

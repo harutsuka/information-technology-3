@@ -32,7 +32,7 @@ export default function Home() {
   const quizUrl = `/quiz?weeks=${selectedWeeks.join(",")}&limit=${limit}${onlyFavorites ? `&onlyFavorites=${onlyFavorites}` : ""}${excludeMastered ? `&excludeMastered=${excludeMastered}` : ""}`;
 
   return (
-    <main className="container px-6 py-4 mx-auto md:pt-24 md:flex md:flex-col md:px-16">
+    <main className="container px-2 py-4 mx-auto md:pt-24 md:flex md:flex-col md:px-16">
       <div className="flex flex-col items-center gap-4 max-w-md mx-auto p-4 md:max-w-6xl md:flex-row md:items-center md:gap-16">
         <div className="flex flex-col gap-4 w-full">
           <div className="w-full text-center border border-dashed border-gray-300 p-6 rounded-lg mb-2 md:mb-0">
@@ -73,7 +73,7 @@ export default function Home() {
           </Link>
           <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
             <p>
-              お気に入りの問題・覚えた問題でフィルターできるようになりました！
+              不具合あったらすみません🙇🙇
             </p>
           </div>
         </div>
