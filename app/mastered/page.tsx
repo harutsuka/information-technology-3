@@ -83,9 +83,11 @@ export default function MasteredPage() {
                   【解答】
                 </span>
                 <p className="text-gray-800 font-medium">
-                  {q.quiz_type === "short_answer"
-                    ? JSON.parse(q.answers)[0]
-                    : JSON.parse(q.answers).join(", ")}
+                  {q.quiz_type === "short_answer" ? (
+                    <FormatText text={JSON.parse(q.answers)[0]} />
+                  ) : (
+                    <FormatText text={JSON.parse(q.answers).join(", ")} />
+                  )}
                 </p>
                 {q.note && (
                   <p className="text-xs text-gray-500 mt-2 border-t border-blue-100 pt-2">
