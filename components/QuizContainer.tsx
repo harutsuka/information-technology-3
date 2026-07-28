@@ -54,9 +54,11 @@ export default function QuizContainer({ question }: { question: any }) {
               <div className="border border-button-color rounded-lg p-3 mt-3 bg-white w-[93%]">
                 <p className="font-bold">
                   解答:{" "}
-                  {question.quiz_type === "short_answer"
-                    ? singleChoiceAnswer
-                    : formattedAnswer}
+                  {question.quiz_type === "short_answer" ? (
+                    <FormatText text={singleChoiceAnswer} />
+                  ) : (
+                    <FormatText text={formattedAnswer} />
+                  )}
                 </p>
                 <p className="text-sm mt-2">
                   <FormatText text={question.notes} />
