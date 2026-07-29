@@ -14,9 +14,20 @@ export default function Home() {
   useEffect(() => {
     const savedFavorites = localStorage.getItem("quiz_onlyFavorites");
     const savedMastered = localStorage.getItem("quiz_excludeMastered");
+    const savedWeeks = localStorage.getItem("quiz_selectedWeeks");
 
     if (savedFavorites !== null) setOnlyFavorites(savedFavorites === "true");
     if (savedMastered !== null) setExcludeMastered(savedMastered === "true");
+    if (savedWeeks !== null) {
+      try {
+        const parsedWeeks = JSON.parse(savedWeeks);
+        if (Array.isArray(parsedWeeks)) {
+          setSelectedWeeks(parsedWeeks);
+        }
+      } catch (error) {
+        console.error("Error parsing saved weeks:", error);
+      }
+    }
 
     setIsLoaded(true);
   }, []);
@@ -27,7 +38,8 @@ export default function Home() {
 
     localStorage.setItem("quiz_onlyFavorites", onlyFavorites.toString());
     localStorage.setItem("quiz_excludeMastered", excludeMastered.toString());
-  }, [onlyFavorites, excludeMastered, isLoaded]);
+    localStorage.setItem("quiz_selectedWeeks", JSON.stringify(selectedWeeks));
+  }, [onlyFavorites, excludeMastered, isLoaded, selectedWeeks]);
 
   const quizUrl = `/quiz?weeks=${selectedWeeks.join(",")}&limit=${limit}${onlyFavorites ? `&onlyFavorites=${onlyFavorites}` : ""}${excludeMastered ? `&excludeMastered=${excludeMastered}` : ""}`;
 
@@ -49,7 +61,24 @@ export default function Home() {
           </div>
           {/* 動的に作ったURL（quizUrl）を使ってクイズページに飛ぶ */}
           <Link href={quizUrl} className="w-full inline-block">
-            <div className="bg-main-color hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg text-center shadow-main">
+            <div
+              className="bg-main-color hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg text-center shadow-main"
+              onClick={() => {
+                // クイズを開始する前に、設定をlocalStorageに保存
+                localStorage.setItem(
+                  "quiz_onlyFavorites",
+                  onlyFavorites.toString(),
+                );
+                localStorage.setItem(
+                  "quiz_excludeMastered",
+                  excludeMastered.toString(),
+                );
+                localStorage.setItem(
+                  "quiz_selectedWeeks",
+                  JSON.stringify(selectedWeeks),
+                );
+              }}
+            >
               🚀 クイズをはじめる
             </div>
           </Link>
@@ -72,9 +101,7 @@ export default function Home() {
             </div>
           </Link>
           <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
-            <p>
-              不具合あったらすみません🙇🙇
-            </p>
+            <p>不具合あったらすみません🙇🙇</p>
           </div>
         </div>
       </div>
