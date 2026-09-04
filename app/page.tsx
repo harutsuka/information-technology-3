@@ -101,7 +101,7 @@ export default function Home() {
             </div>
           </Link>
           <div className="w-full inline-block bg-gray-100 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg text-center">
-            <p>不具合あったらすみません🙇🙇</p>
+            <p>プロジェクト停止してます🙇</p>
           </div>
         </div>
       </div>
